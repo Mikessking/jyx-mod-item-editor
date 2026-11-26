@@ -820,7 +820,7 @@ class App:
     # ---------------- 界面搭建 ----------------
 
     def build_ui(self):
-        self.root.title("MOD 物品编辑器")
+        self.root.title("金庸群侠传X MOD 物品编辑器")
         screen_w = self.root.winfo_screenwidth()
         screen_h = self.root.winfo_screenheight()
         win_w = min(1320, max(1000, screen_w - 80))
@@ -1981,6 +1981,7 @@ class App:
     def show_help(self):
         messagebox.showinfo(
             "使用说明",
+            "《金庸群侠传X》（JYX）MOD 物品编辑器\n\n"
             "· 左栏搜索/按类型筛选，单击物品在右侧编辑。\n"
             "· 基本信息：名称、类型、等级、冷却、价格、天赋、图标、说明。\n"
             "· 效果与条件：编辑 trigger / require，双击表格行编辑。\n"
@@ -2155,7 +2156,7 @@ class App:
 
     def update_title(self):
         mark = " *" if self.has_changes() else ""
-        self.root.title("MOD 物品编辑器 - %s%s" % (self.store.mod_dir.name, mark))
+        self.root.title("金庸群侠传X MOD 物品编辑器 - %s%s" % (self.store.mod_dir.name, mark))
 
 
 # ---------------------------------------------------------------- 自检
