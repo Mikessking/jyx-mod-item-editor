@@ -11,7 +11,7 @@
 
 **适用游戏：金庸群侠传X（JYX，汉家松鼠工作室）**
 
-本工具针对该游戏 MOD 的**明文数据结构**设计，尤其是 V123.x / WS123 一系的：
+本工具针对该游戏 MOD 的**明文数据结构**设计，主要涉及：
 
 - `Scripts/items.xml`：物品定义
 - `Scripts/resource.xml`：图标资源键映射
@@ -77,11 +77,11 @@ python -m pip install -r requirements.txt
 ### 运行
 
 ```bash
-# 1) 直接运行：优先打开仓库内的演示 MOD（examples/demo_mod）
+# 1) 直接运行：自动查找本地 MOD；找不到时打开仓库演示 MOD
 python item_editor.py
 
 # 2) 打开指定 MOD（目录下应有 Scripts/items.xml）
-python item_editor.py --mod "D:\path\to\modcache\WS123"
+python item_editor.py --mod "D:\path\to\your_mod_dir"
 
 # 3) Windows 也可以双击
 run_editor.bat
@@ -91,9 +91,9 @@ run_editor.bat
 
 在未指定 `--mod` 时，程序按以下顺序查找默认 MOD：
 
-1. `examples/demo_mod`（仓库演示数据）
-2. `./WS123/mod/modcache/WS123`
-3. 当前目录及脚本上级目录中的 `WS123/mod/modcache/WS123`
+1. 当前目录本身（如果它包含 `Scripts/items.xml`）
+2. 当前目录及脚本上级目录中 `modcache` 下的有效 MOD
+3. `examples/demo_mod`（仓库演示数据）
 
 都找不到时，会弹出目录选择框；进入程序后也可以点顶部“更换”。
 
@@ -395,7 +395,7 @@ python item_editor.py --selftest --mod examples/demo_mod
 - 修改解析/序列化逻辑后，建议同时用真实 MOD 副本运行一次：
 
 ```bash
-python item_editor.py --selftest --mod "D:\path\to\modcache\WS123"
+python item_editor.py --selftest --mod "D:\path\to\your_mod_dir"
 ```
 
 ## 贡献

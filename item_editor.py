@@ -11,7 +11,7 @@ MOD 物品编辑器（图形化）
 
 运行：
   python item_editor.py
-  python item_editor.py --mod "D:\\...\\modcache\\WS123"
+  python item_editor.py --mod "D:\\...\\modcache\\your_mod"
   python item_editor.py --selftest
 """
 
@@ -41,19 +41,26 @@ except Exception:  # Pillow 缺失时仅不显示预览
 SCRIPT_DIR = Path(__file__).resolve().parent
 
 
+def _is_mod_dir(path) -> bool:
+    return (Path(path) / "Scripts" / "items.xml").is_file()
+
+
 def find_default_mod_dir():
-    """优先使用仓库内的演示 MOD；在游戏工程内运行时自动找到 WS123。"""
-    candidates = [
-        SCRIPT_DIR / "examples" / "demo_mod",
-        SCRIPT_DIR / "WS123" / "mod" / "modcache" / "WS123",
-        Path.cwd() / "WS123" / "mod" / "modcache" / "WS123",
-    ]
-    for parent in list(SCRIPT_DIR.parents)[:5]:
-        candidates.append(parent / "WS123" / "mod" / "modcache" / "WS123")
-    for candidate in candidates:
-        if (candidate / "Scripts" / "items.xml").is_file():
-            return candidate
-    return SCRIPT_DIR / "examples" / "demo_mod"
+    """优先查找本地真实 MOD；找不到时使用仓库内的演示 MOD。"""
+    demo = SCRIPT_DIR / "examples" / "demo_mod"
+    roots = [Path.cwd(), SCRIPT_DIR] + list(SCRIPT_DIR.parents)[:3]
+    patterns = ("modcache/*", "*/modcache/*", "*/mod/modcache/*")
+    for root in roots:
+        if _is_mod_dir(root):
+            return root
+        for pattern in patterns:
+            try:
+                for candidate in root.glob(pattern):
+                    if candidate.is_dir() and _is_mod_dir(candidate):
+                        return candidate
+            except OSError:
+                pass
+    return demo
 
 
 DEFAULT_MOD_DIR = find_default_mod_dir()
