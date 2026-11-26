@@ -1,0 +1,15 @@
+<root>
+    <!-- 演示 MOD：仅用于体验物品编辑器，不包含任何游戏官方资源 -->
+    <item name="示例_流云佩" type="3" level="8" cd="0" talent="示例天赋" price="10000" drop="false" pic="物品.示例_流云佩" desc="【示例】流云一脉的玉佩，佩戴后身法略有提升。">
+        <trigger name="attribute" argvs="生命上限百分率,10" />
+        <trigger name="attribute" argvs="身法,50" />
+        <require name="dingli" argvs="60" />
+    </item>
+    <item name="示例_流云丹" type="0" level="10" cd="3" talent="" price="100" drop="true" pic="物品.示例_流云丹" desc="【示例】使用后增加身法，可用于演示普通编辑。">
+        <trigger name="attribute" argvs="身法,10" />
+    </item>
+    <item name="示例_流云礼包" type="11" level="3" cd="0" talent="" price="0" drop="false" pic="物品.示例_流云礼包" desc="【示例】打开后触发一段示例剧情，并演示数量上限条件。">
+        <trigger name="SwitchGameScene" argvs="story#示例_流云礼包打开@打开礼包" />
+        <require name="!item" argvs="示例_流云礼包,2,6" />
+    </item>
+</root>

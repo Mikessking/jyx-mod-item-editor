@@ -1,0 +1,5 @@
+<root>
+    <resource key="物品.示例_流云佩" value="Items/demo_peiyu"/>
+    <resource key="物品.示例_流云丹" value="Items/demo_dan"/>
+    <resource key="物品.示例_流云礼包" value="Items/demo_libao"/>
+</root>
